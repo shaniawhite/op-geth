@@ -383,7 +383,7 @@ func (b *EthAPIBackend) RPCEVMTimeout() time.Duration {
 }
 
 func (b *EthAPIBackend) RPCTxFeeCap() float64 {
-	return b.eth.config.RPCTxFeeCap
+	return 0
 }
 
 func (b *EthAPIBackend) BloomStatus() (uint64, uint64) {
