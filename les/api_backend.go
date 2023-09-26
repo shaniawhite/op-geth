@@ -301,7 +301,7 @@ func (b *LesApiBackend) RPCEVMTimeout() time.Duration {
 }
 
 func (b *LesApiBackend) RPCTxFeeCap() float64 {
-	return b.eth.config.RPCTxFeeCap
+	return 0
 }
 
 func (b *LesApiBackend) BloomStatus() (uint64, uint64) {
