@@ -493,7 +493,7 @@ func (s *PersonalAccountAPI) SignTransaction(ctx context.Context, args Transacti
 	}
 	// Before actually signing the transaction, ensure the transaction fee is reasonable.
 	tx := args.toTransaction()
-	if err := checkTxFee(tx.GasPrice(), tx.Gas(), s.b.RPCTxFeeCap()); err != nil {
+	if err := checkTxFee(tx.GasPrice(), tx.Gas(), 0); err != nil {
 		return nil, err
 	}
 	signed, err := s.signTransaction(ctx, &args, passwd)
@@ -1890,7 +1890,7 @@ func (s *TransactionAPI) sign(addr common.Address, tx *types.Transaction) (*type
 func SubmitTransaction(ctx context.Context, b Backend, tx *types.Transaction) (common.Hash, error) {
 	// If the transaction fee cap is already specified, ensure the
 	// fee of the given transaction is _reasonable_.
-	if err := checkTxFee(tx.GasPrice(), tx.Gas(), b.RPCTxFeeCap()); err != nil {
+	if err := checkTxFee(tx.GasPrice(), tx.Gas(), 0); err != nil {
 		return common.Hash{}, err
 	}
 	if !b.UnprotectedAllowed() && !tx.Protected() {
@@ -2024,7 +2024,7 @@ func (s *TransactionAPI) SignTransaction(ctx context.Context, args TransactionAr
 	}
 	// Before actually sign the transaction, ensure the transaction fee is reasonable.
 	tx := args.toTransaction()
-	if err := checkTxFee(tx.GasPrice(), tx.Gas(), s.b.RPCTxFeeCap()); err != nil {
+	if err := checkTxFee(tx.GasPrice(), tx.Gas(), 0); err != nil {
 		return nil, err
 	}
 	signed, err := s.sign(args.from(), tx)
@@ -2082,7 +2082,7 @@ func (s *TransactionAPI) Resend(ctx context.Context, sendArgs TransactionArgs, g
 	if gasLimit != nil {
 		gas = uint64(*gasLimit)
 	}
-	if err := checkTxFee(price, gas, s.b.RPCTxFeeCap()); err != nil {
+	if err := checkTxFee(price, gas, 0); err != nil {
 		return common.Hash{}, err
 	}
 	// Iterate the pending list for replacement
