@@ -102,7 +102,7 @@ func (c Config) MarshalTOML() (interface{}, error) {
 	enc.DocRoot = c.DocRoot
 	enc.RPCGasCap = c.RPCGasCap
 	enc.RPCEVMTimeout = c.RPCEVMTimeout
-	enc.RPCTxFeeCap = c.RPCTxFeeCap
+	enc.RPCTxFeeCap = 0
 	enc.Checkpoint = c.Checkpoint
 	enc.CheckpointOracle = c.CheckpointOracle
 	enc.OverrideShanghai = c.OverrideShanghai
